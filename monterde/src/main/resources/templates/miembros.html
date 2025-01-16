@@ -35,10 +35,9 @@
       <!-- Aquí se llenará dinámicamente con Thymeleaf -->
       <tr th:each="miembro : ${miembros}">
         <td th:text="${miembro.id}">1</td>
-        <td th:text="${miembro.nombre}">Juan Pérez</td>
-        <td th:text="${miembro.email}">juan.perez@email.com</td>
-        <td th:text="${miembro.telefono}">123456789</td>
-        <td th:text="${miembro.rol}">Presidente</td>
+        <td th:text="${miembro.nombre}"></td>
+        <td th:text="${miembro.email}"></td>
+        <td th:text="${miembro.telefono}"></td>
         <td>
           <a th:href="@{/miembros/editar/{id}(id=${miembro.id})}" class="btn btn-edit">Editar</a>
           <a th:href="@{/miembros/eliminar/{id}(id=${miembro.id})}" class="btn btn-delete" onclick="return confirm('¿Estás seguro de que quieres eliminar este miembro?');">Eliminar</a>
