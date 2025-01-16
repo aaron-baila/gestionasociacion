@@ -22,10 +22,10 @@ public class MiembroServiceImpl implements MiembroService {
         miembroRepository.save(miembro);
     }
     public void eliminarMiembro(Long idMiembro) {
-        miembroRepository.deleteById(idMiembro.toString());
+        miembroRepository.deleteById(idMiembro);
     }
     public Optional<Miembro> obtenerMiembroPorId(Long id) {
-        return miembroRepository.findById(id.toString());
+        return miembroRepository.findById(id);
     }
     public void actualizarMiembro(Miembro miembro) {
         miembroRepository.save(miembro);

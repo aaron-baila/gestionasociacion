@@ -23,8 +23,9 @@ public class MiembroController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<Void> eliminarMiembro(@PathVariable Long id) {
-        miembroService.eliminarMiembro(id); // Llama al servicio para eliminar
-        return ResponseEntity.ok().build(); // Responde con un estado 200 OK
+    public String eliminarMiembro(@PathVariable Long id) {
+        miembroService.eliminarMiembro(id); // Llama al servicio
+        return "redirect:/miembros"; // Redirige tras eliminar
     }
+
 }

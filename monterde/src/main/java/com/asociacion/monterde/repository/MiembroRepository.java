@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MiembroRepository extends JpaRepository<Miembro, String> {
+public interface MiembroRepository extends JpaRepository<Miembro, Long> {
     String id(Long id);
 }
