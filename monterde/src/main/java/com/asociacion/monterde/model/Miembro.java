@@ -1,13 +1,9 @@
 package com.asociacion.monterde.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
 
-import java.util.Objects;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -20,24 +16,47 @@ public class Miembro {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremento para el ID
     private Long id;
 
-    private String nombre;   // Nombre del miembro
-    private String email;    // Correo electrónico
+    @Column(nullable = false, length = 15)
+    private String dni; // DNI del miembro
+
+    @Column(nullable = false, length = 100)
+    private String nombre; // Nombre del miembro
+
+    @Column(length = 100)
+    private String apellidos; // Apellidos del miembro
+
+    @Column(length = 50)
+    private String apodo; // Apodo del miembro
+
+    @Column(length = 100)
+    private String email; // Correo electrónico
+
+    @Column(length = 15)
     private String telefono; // Teléfono de contacto
-    private String rol;
 
-    @Override
-    public final boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
-        if (thisEffectiveClass != oEffectiveClass) return false;
-        Miembro miembro = (Miembro) o;
-        return getId() != null && Objects.equals(getId(), miembro.getId());
-    }
+    @Lob
+    private String direccion; // Dirección
 
-    @Override
-    public final int hashCode() {
-        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento; // Fecha de nacimiento
+
+    @Lob
+    private String foto; // Foto del miembro
+
+    @Column(length = 50)
+    private String cargo; // Cargo del miembro
+
+    @Temporal(TemporalType.DATE)
+    private Date fechaIngreso; // Fecha de ingreso
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "ENUM('activo','inactivo') DEFAULT 'activo'")
+    private Estado estado = Estado.ACTIVO; // Estado (activo o inactivo)
+
+    private Boolean LOPD; // LOPD (protección de datos) aceptado
+
+    // Enum para el estado
+    public enum Estado {
+        ACTIVO, INACTIVO
     }
 }
