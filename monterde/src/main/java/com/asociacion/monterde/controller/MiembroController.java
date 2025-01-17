@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/miembros")
@@ -24,11 +21,21 @@ public class MiembroController {
         return "miembros";
     }
 
-//    @DeleteMapping("/eliminar/{id}")
+    //TODO:    @DeleteMapping("/eliminar/{id}") habra que investigar como hacerlo
     @GetMapping("/eliminar/{id}")
     public String eliminarMiembro(@PathVariable Long id) {
         miembroService.eliminarMiembro(id); // Llama al servicio
         return "redirect:/miembros"; // Redirige tras eliminar
     }
 
+
+    @GetMapping("/nuevo")
+    public String agregarMiembro() {
+        return "nuevomiembro";
+    }
+//    @GetMapping("/nuevo")
+//    public String agregarMiembro(Miembro miembro) {
+//        miembroService.crearMiembro(miembro);
+//        return "nuevomiembro";
+//    }
 }

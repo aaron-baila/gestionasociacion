@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- Fragmento de Header -->
+<div th:fragment="header">
+    <header>
+        <h1>Gestión de Miembros</h1>
+        <nav>
+            <a th:href="@{/index}">Inicio</a>
+            <a th:href="@{/miembros}">Miembros</a>
+            <a th:href="@{/eventos}">Eventos</a>
+            <a th:href="@{/dashboard}">Dashboard</a>
+        </nav>
+    </header>
+</div>
+</body>
+</html>

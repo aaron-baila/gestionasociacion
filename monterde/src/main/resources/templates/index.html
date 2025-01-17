@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +7,24 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-<header>
-    <h1>Asociación Monterde</h1>
-    <nav>
-        <a href="/">Inicio</a>
-        <a href="/miembros">Miembros</a>
-        <a href="/eventos">Eventos</a>
-        <a href="/contacto">Contacto</a>
-    </nav>
-</header>
+<!-- Incluir el Header -->
+<div th:replace="header/header :: header"></div>
 
+<!-- Contenido Principal -->
 <main>
-    <h2>Bienvenidos a la página principal de la Asociación Monterde</h2>
-    <div class="buttons">
-        <a href="/miembros">Ver Miembros</a>
-        <a href="/eventos">Ver Eventos</a>
-        <a href="/contacto">Contactar</a>
-    </div>
+    <section>
+        <h2>Bienvenidos a la página principal de la Asociación Monterde</h2>
+        <p>Explora nuestras actividades, conoce a nuestros miembros y participa en nuestros eventos.</p>
+    </section>
+
+    <section class="buttons">
+        <a href="/miembros" th:href="@{/miembros}" class="button">Ver Miembros</a>
+        <a href="/eventos" th:href="@{/eventos}" class="button">Ver Eventos</a>
+        <a href="/contacto" th:href="@{/contacto}" class="button">Contactar</a>
+    </section>
 </main>
 
+<!-- Footer -->
 <footer>
     <p>&copy; 2025 Asociación Monterde | Todos los derechos reservados.</p>
 </footer>

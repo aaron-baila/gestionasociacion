@@ -13,14 +13,14 @@
     <a href="/index">Inicio</a>
     <a href="/miembros">Miembros</a>
     <a href="/eventos">Eventos</a>
-    <a href="/dashboard">Inicio</a>
   </nav>
 </header>
 
 <main>
   <section>
     <h2>Lista de Miembros</h2>
-    <table border="1">
+    <a th:href="@{/miembros/nuevo}" class="btn btn-new">Nuevo miembro</a>
+    <table>
       <thead>
       <tr>
         <th>ID</th>
@@ -45,30 +45,6 @@
       </tr>
       </tbody>
     </table>
-  </section>
-
-  <section>
-    <h2>Agregar Miembro</h2>
-    <form th:action="@{/miembros/agregar}" method="post">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required>
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="telefono">Teléfono:</label>
-      <input type="text" id="telefono" name="telefono" required>
-
-      <label for="rol">Rol:</label>
-      <select id="rol" name="rol">
-        <option value="Presidente">Presidente</option>
-        <option value="Tesorero">Tesorero</option>
-        <option value="Secretario">Secretario</option>
-        <option value="Miembro">Miembro</option>
-      </select>
-
-      <button type="submit" class="btn btn-submit">Agregar</button>
-    </form>
   </section>
 </main>
 
