@@ -2,8 +2,7 @@ package com.asociacion.monterde.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -12,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Miembro {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incremento para el ID
     private Long id;
@@ -37,8 +37,8 @@ public class Miembro {
     @Lob
     private String direccion; // Dirección
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaNacimiento; // Fecha de nacimiento
+    @Column(nullable = false)
+    private LocalDate fechaNacimiento; // Fecha de nacimiento
 
     @Lob
     private String foto; // Foto del miembro
@@ -46,16 +46,16 @@ public class Miembro {
     @Column(length = 50)
     private String cargo; // Cargo del miembro
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaIngreso; // Fecha de ingreso
+    @Column(nullable = false)
+    private LocalDate fechaIngreso; // Fecha de ingreso
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "ENUM('activo','inactivo') DEFAULT 'activo'")
-    private Estado estado = Estado.ACTIVO; // Estado (activo o inactivo)
+    @Column(columnDefinition = "ENUM('ACTIVO', 'INACTIVO') DEFAULT 'ACTIVO'")
+    private Estado estado = Estado.ACTIVO;
 
     private Boolean LOPD; // LOPD (protección de datos) aceptado
 
-    // Enum para el estado
+
     public enum Estado {
         ACTIVO, INACTIVO
     }

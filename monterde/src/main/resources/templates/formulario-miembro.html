@@ -10,36 +10,37 @@
 <main>
     <h2>Agregar Miembro</h2>
     <section>
-        <form th:action="@{/miembros/agregar}" method="post">
+        <!--/*@thymesVar id="miembro" type="com.asociacion.monterde.model.Miembro"*/-->
+        <form th:action="@{/miembros/formulario}" th:object="${miembro}" method="post" enctype="multipart/form-data">
             <label for="dni">DNI:</label>
-            <input type="text" id="dni" name="dni" required>
+            <input type="text" id="dni" th:field="*{dni}" required>
 
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
+            <input type="text" id="nombre" th:field="*{nombre}" required>
 
             <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" name="apellidos">
+            <input type="text" id="apellidos" th:field="*{apellidos}">
 
             <label for="apodo">Apodo:</label>
-            <input type="text" id="apodo" name="apodo">
+            <input type="text" id="apodo" th:field="*{apodo}">
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" th:field="*{email}" required>
 
             <label for="telefono">Teléfono:</label>
-            <input type="text" id="telefono" name="telefono">
+            <input type="text" id="telefono" th:field="*{telefono}">
 
             <label for="direccion">Dirección:</label>
-            <textarea id="direccion" name="direccion"></textarea>
+            <textarea id="direccion" th:field="*{direccion}"></textarea>
 
             <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-            <input type="date" id="fechaNacimiento" name="fechaNacimiento">
-
-            <label for="foto">Foto:</label>
-            <input type="file" id="foto" name="foto">
+            <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}" required>
+<!--TODO: PONER FOTO-->
+<!--            <label for="foto">Foto:</label>-->
+<!--            <input type="file" id="foto" th:field="*{foto}">-->
 
             <label for="cargo">Cargo:</label>
-            <select id="cargo" name="cargo">
+            <select id="cargo" th:field="*{cargo}">
                 <option value="Miembro">Miembro</option>
                 <option value="Presidente">Presidente</option>
                 <option value="Tesorero">Tesorero</option>
@@ -47,16 +48,16 @@
             </select>
 
             <label for="fechaIngreso">Fecha de Ingreso:</label>
-            <input type="date" id="fechaIngreso" name="fechaIngreso">
+            <input type="date" id="fechaIngreso" th:field="*{fechaIngreso}" required>
 
             <label for="estado">Estado:</label>
-            <select id="estado" name="estado">
-                <option value="activo">Activo</option>
-                <option value="inactivo">Inactivo</option>
+            <select id="estado" th:field="*{estado}">
+                <option value="ACTIVO">Activo</option>
+                <option value="INACTIVO">Inactivo</option>
             </select>
 
             <label for="LOPD">LOPD:</label>
-            <input type="checkbox" id="LOPD" name="LOPD">
+            <input type="checkbox" id="LOPD" th:field="*{LOPD}">
 
             <button type="submit" class="btn btn-submit">Agregar</button>
         </form>

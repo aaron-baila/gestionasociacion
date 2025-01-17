@@ -128,6 +128,11 @@ table tr:nth-child(even) {
     background-color: #cc0000;
 }
 
+.btn-view {
+    background-color: #00e6de;
+    color: black;
+}
+
 /* Formularios */
 form {
     max-width: 400px;
