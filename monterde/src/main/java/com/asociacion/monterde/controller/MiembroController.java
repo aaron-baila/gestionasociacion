@@ -30,5 +30,8 @@ public class MiembroController {
         miembroService.eliminarMiembro(id); // Llama al servicio
         return "redirect:/miembros"; // Redirige tras eliminar
     }
-
+    @GetMapping("/nuevo")
+    public String agregarMiembro() {
+        return "nuevoMiembro";
+    }
 }
