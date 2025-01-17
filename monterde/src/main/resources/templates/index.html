@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +7,10 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-<header>
-    <h1>Asociación Monterde</h1>
-    <nav>
-        <a href="/">Inicio</a>
-        <a href="/miembros">Miembros</a>
-        <a href="/eventos">Eventos</a>
-        <a href="/contacto">Contacto</a>
-    </nav>
-</header>
+<!-- Header reutilizable -->
+<div th:replace="fragments/header :: header"></div>
 
+<!-- Contenido principal -->
 <main>
     <h2>Bienvenidos a la página principal de la Asociación Monterde</h2>
     <div class="buttons">

@@ -1,79 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Miembros</title>
-  <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Miembros</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-<header>
-  <h1>Gestión de Miembros</h1>
-  <nav>
-    <a href="/index">Inicio</a>
-    <a href="/miembros">Miembros</a>
-    <a href="/eventos">Eventos</a>
-    <a href="/dashboard">Inicio</a>
-  </nav>
-</header>
+<div th:replace="fragments/header :: header"></div>
 
 <main>
-  <section>
-    <h2>Lista de Miembros</h2>
-    <table border="1">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Email</th>
-        <th>Teléfono</th>
-        <th>Rol</th>
-        <th>Acciones</th>
-      </tr>
-      </thead>
-      <tbody>
-      <!-- Aquí se llenará dinámicamente con Thymeleaf -->
-      <tr th:each="miembro : ${miembros}">
-        <td th:text="${miembro.id}">1</td>
-        <td th:text="${miembro.nombre}"></td>
-        <td th:text="${miembro.email}"></td>
-        <td th:text="${miembro.telefono}"></td>
-        <td>
-          <a th:href="@{/miembros/editar/{id}(id=${miembro.id})}" class="btn btn-edit">Editar</a>
-          <a th:href="@{/miembros/eliminar/{id}(id=${miembro.id})}" class="btn btn-delete" onclick="return confirm('¿Estás seguro de que quieres eliminar este miembro?');">Eliminar</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </section>
+    <section>
+        <h2>Lista de Miembros</h2>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Aquí se llenará dinámicamente con Thymeleaf -->
+            <tr th:each="miembro : ${miembros}">
+                <td th:text="${miembro.id}">1</td>
+                <td th:text="${miembro.nombre}"></td>
+                <td th:text="${miembro.email}"></td>
+                <td th:text="${miembro.telefono}"></td>
+                <td>
+                    <a th:href="@{/miembros/editar/{id}(id=${miembro.id})}" class="btn btn-edit">Editar</a>
+                    <a th:href="@{/miembros/eliminar/{id}(id=${miembro.id})}" class="btn btn-delete"
+                       onclick="return confirm('¿Estás seguro de que quieres eliminar este miembro?');">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
 
-  <section>
-    <h2>Agregar Miembro</h2>
-    <form th:action="@{/miembros/agregar}" method="post">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required>
+    <section>
+        <h2>Agregar Miembro</h2>
+        <form th:action="@{/miembros/agregar}" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-      <label for="telefono">Teléfono:</label>
-      <input type="text" id="telefono" name="telefono" required>
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" required>
 
-      <label for="rol">Rol:</label>
-      <select id="rol" name="rol">
-        <option value="Presidente">Presidente</option>
-        <option value="Tesorero">Tesorero</option>
-        <option value="Secretario">Secretario</option>
-        <option value="Miembro">Miembro</option>
-      </select>
+            <label for="rol">Rol:</label>
+            <select id="rol" name="rol">
+                <option value="Presidente">Presidente</option>
+                <option value="Tesorero">Tesorero</option>
+                <option value="Secretario">Secretario</option>
+                <option value="Miembro">Miembro</option>
+            </select>
 
-      <button type="submit" class="btn btn-submit">Agregar</button>
-    </form>
-  </section>
+            <button type="submit" class="btn btn-submit">Agregar</button>
+        </form>
+    </section>
 </main>
 
 <footer>
-  <p>&copy; 2025 Asociación Monterde</p>
+    <p>&copy; 2025 Asociación Monterde</p>
 </footer>
 </body>
 </html>
