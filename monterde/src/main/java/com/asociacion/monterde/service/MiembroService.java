@@ -42,7 +42,8 @@ public interface MiembroService {
     /**
      * Actualiza la información de un miembro existente.
      *
+     * @param id
      * @param miembro Objeto Miembro con la información actualizada.
      */
-    void actualizarMiembro(Miembro miembro);
+    void actualizarMiembro(Long id, Miembro miembro);
 }

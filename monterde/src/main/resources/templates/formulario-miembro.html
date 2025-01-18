@@ -2,16 +2,24 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Nuevo miembro</title>
+    <title>Editar Miembro</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <main>
-    <h2>Agregar Miembro</h2>
+    <h2 th:text="${miembro.id != null ? 'Editar Miembro' : 'Nuevo Miembro'}"></h2>
     <section>
-        <!--/*@thymesVar id="miembro" type="com.asociacion.monterde.model.Miembro"*/-->
-        <form th:action="@{/miembros/formulario}" th:object="${miembro}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/miembros/editar/{id}(id=${miembro.id})}" th:object="${miembro}" method="post" enctype="multipart/form-data">
+
+            <!-- Campo de ID (Solo lectura) -->
+            <div th:if="${miembro.id != null}">
+                <label for="idDisplay">ID:</label>
+                <span id="idDisplay" th:text="${miembro.id}"
+                      style="display: inline-block; padding: 0.5em; border: 1px solid #1c655b; border-radius: 4px; background-color: #8a7d7d; color: white; margin-bottom: 1em;"></span>
+
+            </div>
+
             <label for="dni">DNI:</label>
             <input type="text" id="dni" th:field="*{dni}" required>
 
@@ -34,32 +42,26 @@
             <textarea id="direccion" th:field="*{direccion}"></textarea>
 
             <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-            <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}" required>
-<!--TODO: PONER FOTO-->
-<!--            <label for="foto">Foto:</label>-->
-<!--            <input type="file" id="foto" th:field="*{foto}">-->
+            <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}">
 
             <label for="cargo">Cargo:</label>
             <select id="cargo" th:field="*{cargo}">
-                <option value="Miembro">Miembro</option>
-                <option value="Presidente">Presidente</option>
-                <option value="Tesorero">Tesorero</option>
-                <option value="Secretario">Secretario</option>
+                <option value="Miembro" th:selected="${miembro.cargo == 'Miembro'}">Miembro</option>
+                <option value="Presidente" th:selected="${miembro.cargo == 'Presidente'}">Presidente</option>
+                <option value="Tesorero" th:selected="${miembro.cargo == 'Tesorero'}">Tesorero</option>
+                <option value="Secretario" th:selected="${miembro.cargo == 'Secretario'}">Secretario</option>
             </select>
-
-            <label for="fechaIngreso">Fecha de Ingreso:</label>
-            <input type="date" id="fechaIngreso" th:field="*{fechaIngreso}" required>
 
             <label for="estado">Estado:</label>
             <select id="estado" th:field="*{estado}">
-                <option value="ACTIVO">Activo</option>
-                <option value="INACTIVO">Inactivo</option>
+                <option value="ACTIVO" th:selected="${miembro.estado == 'ACTIVO'}">Activo</option>
+                <option value="INACTIVO" th:selected="${miembro.estado == 'INACTIVO'}">Inactivo</option>
             </select>
 
             <label for="LOPD">LOPD:</label>
             <input type="checkbox" id="LOPD" th:field="*{LOPD}">
 
-            <button type="submit" class="btn btn-submit">Agregar</button>
+            <button type="submit" class="btn btn-submit" th:text="${miembro.id != null ? 'Actualizar' : 'Agregar'}"></button>
         </form>
     </section>
 </main>

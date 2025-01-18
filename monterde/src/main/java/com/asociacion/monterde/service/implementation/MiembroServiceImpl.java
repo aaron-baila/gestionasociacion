@@ -3,6 +3,9 @@ package com.asociacion.monterde.service.implementation;
 import com.asociacion.monterde.model.Miembro;
 import com.asociacion.monterde.repository.MiembroRepository;
 import com.asociacion.monterde.service.MiembroService;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,16 +21,36 @@ public class MiembroServiceImpl implements MiembroService {
     public List<Miembro> obtenerTodosLosMiembros() {
         return miembroRepository.findAll();
     }
+
     public void crearMiembro(Miembro miembro) {
         miembroRepository.save(miembro);
     }
+
     public void eliminarMiembro(Long idMiembro) {
         miembroRepository.deleteById(idMiembro);
     }
+
     public Optional<Miembro> obtenerMiembroPorId(Long id) {
         return miembroRepository.findById(id);
     }
-    public void actualizarMiembro(Miembro miembro) {
-        miembroRepository.save(miembro);
+
+    @Transactional
+    public void actualizarMiembro(Long id, Miembro miembroActualizado) {
+        // Buscar el miembro en la base de datos
+        Optional<Miembro> miembroOptional = miembroRepository.findById(id);
+
+        // Si el miembro existe
+        if (miembroOptional.isPresent()) {
+            Miembro miembroExistente = miembroOptional.get();
+            miembroActualizado.setId(miembroExistente.getId());
+
+            // Copiar todas las propiedades de miembroActualizado a miembroExistente
+            BeanUtils.copyProperties(miembroActualizado, miembroExistente);
+            // Guardar el miembro actualizado en la base de datos
+            miembroRepository.save(miembroExistente);
+        } else {
+            // Si el miembro no se encuentra, lanzar una excepción o manejar el error
+            throw new EntityNotFoundException("Miembro con ID " + id + " no encontrado.");
+        }
     }
 }
