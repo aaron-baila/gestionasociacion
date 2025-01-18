@@ -46,4 +46,6 @@ public interface MiembroService {
      * @param miembro Objeto Miembro con la información actualizada.
      */
     void actualizarMiembro(Long id, Miembro miembro);
+
+    boolean existeMiembro(Long id);
 }

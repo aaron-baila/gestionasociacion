@@ -53,4 +53,10 @@ public class MiembroServiceImpl implements MiembroService {
             throw new EntityNotFoundException("Miembro con ID " + id + " no encontrado.");
         }
     }
+
+
+    @Override
+    public boolean existeMiembro(Long id) {
+        return miembroRepository.existsById(id);
+    }
 }
