@@ -56,7 +56,7 @@ public class MiembroController {
     @PostMapping("/editar/{id}")
     public String editarMiembro(@PathVariable Long id, @ModelAttribute Miembro miembroActualizado, Model model) {
         miembroService.actualizarMiembro(id, miembroActualizado);
-        return "miembros";  // Redirección tras la actualización
+        return "redirect:/miembros"; // Redirección tras la actualización
     }
 
 //    @GetMapping("/actualizar/{id}")

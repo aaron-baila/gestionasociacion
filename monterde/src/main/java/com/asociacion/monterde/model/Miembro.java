@@ -46,7 +46,7 @@ public class Miembro {
     @Column(length = 50)
     private String cargo; // Cargo del miembro
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate fechaIngreso; // Fecha de ingreso
 
     @Enumerated(EnumType.STRING)
