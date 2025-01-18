@@ -13,37 +13,26 @@
     <section>
         <!-- Formulario de creación o edición -->
         <form th:action="@{${formAction}}" th:object="${miembro}" method="post" enctype="multipart/form-data">
-
-
-
-        <!-- Campo de ID (Solo lectura) si el miembro ya tiene un id -->
+            <!-- Campo de ID (Solo lectura) si el miembro ya tiene un id -->
             <div th:if="${miembro.id != null}">
                 <label for="idDisplay">ID:</label>
                 <span id="idDisplay" th:text="${miembro.id}"
                       style="display: inline-block; padding: 0.5em; border: 1px solid #1c655b; border-radius: 4px; background-color: #8a7d7d; color: white; margin-bottom: 1em;"></span>
             </div>
-
             <label for="dni">DNI:</label>
-            <input type="text" id="dni" th:field="*{dni}" required>
-
+            <input type="text" id="dni" th:field="*{dni}" pattern="[A-Za-z0-9]{9}" title="Debe contener 9 caracteres alfanuméricos" required>
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" th:field="*{nombre}" required>
-
+            <input type="text" id="nombre" th:field="*{nombre}" autocomplete="given-name" required>
             <label for="apellidos">Apellidos:</label>
             <input type="text" id="apellidos" th:field="*{apellidos}">
-
             <label for="apodo">Apodo:</label>
             <input type="text" id="apodo" th:field="*{apodo}">
-
             <label for="email">Email:</label>
             <input type="email" id="email" th:field="*{email}" required>
-
             <label for="telefono">Teléfono:</label>
             <input type="text" id="telefono" th:field="*{telefono}">
-
             <label for="direccion">Dirección:</label>
             <textarea id="direccion" th:field="*{direccion}"></textarea>
-
             <!-- TODO: Fecha de nacimiento (Si no está funcionando, quitar temporalmente) -->
             <!--            <label for="fechaNacimiento">Fecha de Nacimiento:</label>-->
             <!--            <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}">-->
@@ -55,18 +44,16 @@
                 <option value="Tesorero" th:selected="${miembro.cargo == 'Tesorero'}">Tesorero</option>
                 <option value="Secretario" th:selected="${miembro.cargo == 'Secretario'}">Secretario</option>
             </select>
-
             <label for="estado">Estado:</label>
             <select id="estado" th:field="*{estado}">
                 <option value="ACTIVO" th:selected="${miembro.estado == 'ACTIVO'}">Activo</option>
                 <option value="INACTIVO" th:selected="${miembro.estado == 'INACTIVO'}">Inactivo</option>
             </select>
-
             <label for="LOPD">LOPD:</label>
             <input type="checkbox" id="LOPD" th:field="*{LOPD}">
-
             <!-- Botón dinámico de envío que cambia según si es edición o creación -->
-            <button type="submit" class="btn btn-submit" th:text="${miembro.id != null ? 'Actualizar' : 'Agregar'}"></button>
+            <button type="submit" class="btn btn-submit"
+                    th:text="${miembro.id != null ? 'Actualizar' : 'Agregar'}"></button>
         </form>
     </section>
 </main>

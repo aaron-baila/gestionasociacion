@@ -2,6 +2,7 @@ package com.asociacion.monterde.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDate;
 
 @Entity
@@ -17,37 +18,36 @@ public class Miembro {
     private Long id;
 
     @Column(nullable = false, length = 15)
-    private String dni; // DNI del miembro
+    private String dni;
 
     @Column(nullable = false, length = 100)
-    private String nombre; // Nombre del miembro
+    private String nombre;
 
     @Column(length = 100)
-    private String apellidos; // Apellidos del miembro
+    private String apellidos;
 
     @Column(length = 50)
-    private String apodo; // Apodo del miembro
+    private String apodo;
 
     @Column(length = 100)
-    private String email; // Correo electrónico
+    private String email;
 
     @Column(length = 15)
-    private String telefono; // Teléfono de contacto
-
+    private String telefono;
     @Lob
-    private String direccion; // Dirección
+    private String direccion;
 //TODO: mirar bien fecha nacimiento al editar que se quede igual que la que habia
 //    @Column(nullable = false)
 //    private LocalDate fechaNacimiento; // Fecha de nacimiento
 
     @Lob
-    private String foto; // Foto del miembro
+    private String foto;
 
     @Column(length = 50)
-    private String cargo; // Cargo del miembro
+    private String cargo;
 
     @Column(nullable = true)
-    private LocalDate fechaIngreso; // Fecha de ingreso
+    private LocalDate fechaIngreso;
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "ENUM('ACTIVO', 'INACTIVO') DEFAULT 'ACTIVO'")
@@ -55,8 +55,8 @@ public class Miembro {
 
     private Boolean LOPD; // LOPD (protección de datos) aceptado
 
-
     public enum Estado {
         ACTIVO, INACTIVO
     }
+
 }

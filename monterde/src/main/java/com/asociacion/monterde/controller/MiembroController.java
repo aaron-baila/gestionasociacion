@@ -20,9 +20,8 @@ public class MiembroController {
         this.miembroService = miembroService;
     }
 
-    // Crear un nuevo miembro
     @PostMapping("/formulario")
-    public String agregarMiembro(@ModelAttribute Miembro miembro, Model model) {
+    public String crearMiembro(@ModelAttribute Miembro miembro, Model model) {
         try {
             miembro.setFechaIngreso(LocalDate.now());
             miembroService.crearMiembro(miembro); // Guarda el miembro en la base de datos
