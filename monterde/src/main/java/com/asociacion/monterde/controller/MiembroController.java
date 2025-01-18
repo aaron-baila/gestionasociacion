@@ -43,7 +43,7 @@ public class MiembroController {
         return "redirect:/miembros"; // Redirige tras eliminar
     }
 
-    @GetMapping("/editar/{id}")
+    @GetMapping("/formulario/{id}")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         Optional<Miembro> miembro = miembroService.obtenerMiembroPorId(id);
         if (miembro.isEmpty()) {
@@ -53,7 +53,7 @@ public class MiembroController {
         return "formulario-miembro";  // Vista para editar miembro
     }
 
-    @PostMapping("/editar/{id}")
+    @PostMapping("/formulario/{id}")
     public String editarMiembro(@PathVariable Long id, @ModelAttribute Miembro miembroActualizado, Model model) {
         miembroService.actualizarMiembro(id, miembroActualizado);
         return "redirect:/miembros"; // Redirección tras la actualización

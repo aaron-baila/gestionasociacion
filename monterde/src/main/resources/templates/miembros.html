@@ -46,7 +46,7 @@
                 <td th:text="${miembro.estado}"></td>
                 <td>
                     <a th:href="@{/miembros/{id}(id=${miembro.id})}" class="btn btn-view">Inspeccionar</a>
-                    <a th:href="@{/miembros/editar/{id}(id=${miembro.id})}" class="btn btn-edit">Editar</a>
+                    <a th:href="@{/miembros/formulario/{id}(id=${miembro.id})}" class="btn btn-edit">Editar</a>
                     <a th:href="@{/miembros/eliminar/{id}(id=${miembro.id})}" class="btn btn-delete"
                        onclick="return confirm('¿Estás seguro de que quieres eliminar este miembro?');">Eliminar</a>
                 </td>

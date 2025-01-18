@@ -8,16 +8,19 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <main>
+    <!-- Título dinámico que cambia si es creación o edición -->
     <h2 th:text="${miembro.id != null ? 'Editar Miembro' : 'Nuevo Miembro'}"></h2>
     <section>
-        <form th:action="@{/miembros/editar/{id}(id=${miembro.id})}" th:object="${miembro}" method="post" enctype="multipart/form-data">
+        <!-- Formulario de creación o edición -->
+        <form th:action="@{${formAction}}" th:object="${miembro}" method="post" enctype="multipart/form-data">
 
-            <!-- Campo de ID (Solo lectura) -->
+
+
+        <!-- Campo de ID (Solo lectura) si el miembro ya tiene un id -->
             <div th:if="${miembro.id != null}">
                 <label for="idDisplay">ID:</label>
                 <span id="idDisplay" th:text="${miembro.id}"
                       style="display: inline-block; padding: 0.5em; border: 1px solid #1c655b; border-radius: 4px; background-color: #8a7d7d; color: white; margin-bottom: 1em;"></span>
-
             </div>
 
             <label for="dni">DNI:</label>
@@ -41,9 +44,9 @@
             <label for="direccion">Dirección:</label>
             <textarea id="direccion" th:field="*{direccion}"></textarea>
 
-<!--            TODO: fecha nacimiento funciona mal al editar -->
-<!--            <label for="fechaNacimiento">Fecha de Nacimiento:</label>-->
-<!--            <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}">-->
+            <!-- TODO: Fecha de nacimiento (Si no está funcionando, quitar temporalmente) -->
+            <!--            <label for="fechaNacimiento">Fecha de Nacimiento:</label>-->
+            <!--            <input type="date" id="fechaNacimiento" th:field="*{fechaNacimiento}">-->
 
             <label for="cargo">Cargo:</label>
             <select id="cargo" th:field="*{cargo}">
@@ -62,6 +65,7 @@
             <label for="LOPD">LOPD:</label>
             <input type="checkbox" id="LOPD" th:field="*{LOPD}">
 
+            <!-- Botón dinámico de envío que cambia según si es edición o creación -->
             <button type="submit" class="btn btn-submit" th:text="${miembro.id != null ? 'Actualizar' : 'Agregar'}"></button>
         </form>
     </section>
