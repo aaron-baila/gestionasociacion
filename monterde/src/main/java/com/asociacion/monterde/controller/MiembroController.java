@@ -2,8 +2,10 @@ package com.asociacion.monterde.controller;
 
 import com.asociacion.monterde.model.Miembro;
 import com.asociacion.monterde.service.MiembroService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,16 +23,21 @@ public class MiembroController {
     }
 
     @PostMapping("/formulario")
-    public String crearMiembro(@ModelAttribute Miembro miembro, Model model) {
+    public String crearMiembro(@ModelAttribute @Valid Miembro miembro, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("error", "Por favor corrige los errores en el formulario.");
+            return "formulario-miembro";
+        }
         try {
             miembro.setFechaIngreso(LocalDate.now());
-            miembroService.crearMiembro(miembro); // Guarda el miembro en la base de datos
-            return "redirect:/miembros"; // Redirige a la lista de miembros después de guardar
+            miembroService.crearMiembro(miembro);
+            return "redirect:/miembros";
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el miembro. Inténtalo de nuevo.");
             return "formulario-miembro";
         }
     }
+
 
     // Listar todos los miembros
     @GetMapping

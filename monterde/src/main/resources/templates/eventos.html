@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Eventos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<main>
+    <section>
+        <h2>Lista de Eventos</h2>
+        <a th:href="@{/eventos/formulario}" class="btn btn-new">Nuevo evento</a>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Fecha de Inicio</th>
+                <th>Fecha de Fin</th>
+                <th>Ubicación</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Presupuesto</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Aquí se llenará dinámicamente con Thymeleaf -->
+            <tr th:each="evento : ${eventos}">
+                <td th:text="${evento.id}"></td>
+                <td th:text="${evento.nombre}"></td>
+                <td th:text="${evento.fechaInicio}"></td>
+                <td th:text="${evento.fechaFin}"></td>
+                <td th:text="${evento.ubicacion}"></td>
+                <td th:text="${evento.tipo}"></td>
+                <td th:text="${evento.estado}"></td>
+                <td th:text="${evento.presupuesto}"></td>
+                <td>
+                    <a th:href="@{/eventos/formulario/{id}(id=${evento.id})}" class="btn btn-edit">Editar</a>
+                    <a th:href="@{/eventos/eliminar/{id}(id=${evento.id})}" class="btn btn-delete"
+                       onclick="return confirm('¿Estás seguro de que quieres eliminar este evento?');">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2025 Asociación Monterde</p>
+</footer>
+</body>
+</html>

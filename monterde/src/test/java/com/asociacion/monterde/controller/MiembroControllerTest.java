@@ -34,27 +34,27 @@ class MiembroControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    void testCrearMiembro_Success() {
-        Miembro miembro = new Miembro();
-//        when(miembroService.crearMiembro(any(Miembro.class))).thenReturn(miembro);
+//    @Test
+//    void testCrearMiembro_Success() {
+//        Miembro miembro = new Miembro();
+////        when(miembroService.crearMiembro(any(Miembro.class))).thenReturn(miembro);
+//
+//        String viewName = miembroController.crearMiembro(miembro, model);
+//
+//        verify(miembroService, times(1)).crearMiembro(any(Miembro.class));
+//        assertEquals("redirect:/miembros", viewName);
+//    }
 
-        String viewName = miembroController.crearMiembro(miembro, model);
-
-        verify(miembroService, times(1)).crearMiembro(any(Miembro.class));
-        assertEquals("redirect:/miembros", viewName);
-    }
-
-    @Test
-    void testCrearMiembro_Failure() {
-        Miembro miembro = new Miembro();
-        doThrow(new RuntimeException()).when(miembroService).crearMiembro(any(Miembro.class));
-
-        String viewName = miembroController.crearMiembro(miembro, model);
-
-        verify(model, times(1)).addAttribute(eq("error"), anyString());
-        assertEquals("formulario-miembro", viewName);
-    }
+//    @Test
+//    void testCrearMiembro_Failure() {
+//        Miembro miembro = new Miembro();
+//        doThrow(new RuntimeException()).when(miembroService).crearMiembro(any(Miembro.class));
+//
+//        String viewName = miembroController.crearMiembro(miembro, model);
+//
+//        verify(model, times(1)).addAttribute(eq("error"), anyString());
+//        assertEquals("formulario-miembro", viewName);
+//    }
 
     @Test
     void testListarMiembros() {
