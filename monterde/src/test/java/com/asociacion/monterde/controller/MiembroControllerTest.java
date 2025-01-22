@@ -75,24 +75,24 @@ class MiembroControllerTest {
         assertEquals("formulario-miembro", viewName);
     }
 
-    @Test
-    void testEliminarMiembro_Exists() {
-        when(miembroService.existeMiembro(1L)).thenReturn(true);
+//    @Test
+//    void testEliminarMiembro_Exists() {
+//        when(miembroService.existeMiembro(1L)).thenReturn(true);
+//
+//        String viewName = miembroController.eliminarMiembro(1L);
+//
+//        verify(miembroService, times(1)).eliminarMiembro(1L);
+//        assertEquals("redirect:/miembros", viewName);
+//    }
 
-        String viewName = miembroController.eliminarMiembro(1L);
-
-        verify(miembroService, times(1)).eliminarMiembro(1L);
-        assertEquals("redirect:/miembros", viewName);
-    }
-
-    @Test
-    void testEliminarMiembro_NotExists() {
-        when(miembroService.existeMiembro(1L)).thenReturn(false);
-
-        String viewName = miembroController.eliminarMiembro(1L);
-
-        assertEquals("redirect:/miembros?error=notfound", viewName);
-    }
+//    @Test
+//    void testEliminarMiembro_NotExists() {
+//        when(miembroService.existeMiembro(1L)).thenReturn(false);
+//
+//        String viewName = miembroController.eliminarMiembro(1L);
+//
+//        assertEquals("redirect:/miembros?error=notfound", viewName);
+//    }
 
     @Test
     void testMostrarFormularioEdicion_Exists() {

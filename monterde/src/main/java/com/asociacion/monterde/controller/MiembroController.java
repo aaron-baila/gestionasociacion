@@ -26,43 +26,48 @@ public class MiembroController {
     public String crearMiembro(@ModelAttribute @Valid Miembro miembro, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("error", "Por favor corrige los errores en el formulario.");
-            return "formulario-miembro";
+            return "miembros/formulario-miembro";
         }
         try {
             miembro.setFechaIngreso(LocalDate.now());
             miembroService.crearMiembro(miembro);
+            model.addAttribute("success", "Miembro creado con éxito."); // Mensaje de éxito
             return "redirect:/miembros";
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el miembro. Inténtalo de nuevo.");
-            return "formulario-miembro";
+            return "miembros/formulario-miembro";
         }
     }
+
 
 
     // Listar todos los miembros
     @GetMapping
     public String listarMiembros(Model model) {
         model.addAttribute("miembros", miembroService.obtenerTodosLosMiembros());
-        return "miembros";
+        return "miembros/miembros";
     }
 
     // Mostrar formulario vacío para agregar un nuevo miembro
     @GetMapping("/formulario")
     public String mostrarFormulario(Model model) {
         model.addAttribute("miembro", new Miembro());
-        return "formulario-miembro"; // Nombre del template Thymeleaf
+        return "miembros/formulario-miembro"; // Nombre del template Thymeleaf
     }
 
-    // Eliminar un miembro por ID
     @GetMapping("/eliminar/{id}")
-    public String eliminarMiembro(@PathVariable Long id) {
+    public String eliminarMiembro(@PathVariable Long id, @RequestParam(required = false) String redirect) {
         if (miembroService.existeMiembro(id)) {
-            miembroService.eliminarMiembro(id); // Llama al servicio
-            return "redirect:/miembros"; // Redirige tras eliminar
-        } else {
-            return "redirect:/miembros?error=notfound"; // Redirige si el miembro no existe
+            miembroService.eliminarMiembro(id); // Llama al servicio para eliminar al miembro
+
+            if ("true".equals(redirect)) {
+                // Si el parámetro 'redirect' está presente, redirige a la lista de miembros
+                return "redirect:/miembros";
+            }
         }
+        return "redirect:/miembros?error=notfound"; // Redirige si no se encuentra el miembro
     }
+
 
     // Mostrar formulario prellenado para editar un miembro existente
     @GetMapping("/formulario/{id}")
@@ -70,7 +75,7 @@ public class MiembroController {
         Optional<Miembro> miembro = miembroService.obtenerMiembroPorId(id);
         if (miembro.isPresent()) {
             model.addAttribute("miembro", miembro.get());
-            return "formulario-miembro"; // Vista para editar miembro
+            return "miembros/formulario-miembro"; // Vista para editar miembro
         } else {
             return "redirect:/miembros?error=notfound"; // Redirige si no se encuentra el miembro
         }
