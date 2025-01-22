@@ -41,14 +41,14 @@ public class EventoController {
     @GetMapping
     public String listarEventos(Model model) {
         model.addAttribute("eventos", eventoService.obtenerTodosLosEventos());
-        return "eventos";
+        return "eventos/eventos";
     }
 
     // Mostrar formulario vacío para agregar un nuevo evento
     @GetMapping("/formulario")
     public String mostrarFormulario(Model model) {
         model.addAttribute("evento", new Evento());
-        return "formulario-evento"; // Nombre del template Thymeleaf
+        return "eventos/formulario-evento"; // Nombre del template Thymeleaf
     }
 
     // Eliminar un evento por ID
@@ -68,7 +68,7 @@ public class EventoController {
         Optional<Evento> evento = eventoService.obtenerEventoPorId(id);
         if (evento.isPresent()) {
             model.addAttribute("evento", evento.get());
-            return "formulario-evento"; // Vista para editar evento
+            return "eventos/formulario-evento"; // Vista para editar evento
         } else {
             return "redirect:/eventos?error=notfound"; // Redirige si no se encuentra el evento
         }
