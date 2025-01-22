@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${evento.id != null ? 'Editar Evento' : 'Nuevo Evento'}"></title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<main>
+    <!-- Título dinámico -->
+    <h2 th:text="${evento.id != null ? 'Editar Evento' : 'Nuevo Evento'}"></h2>
+
+    <section>
+        <!-- Formulario de creación o edición -->
+        <form th:action="@{${formAction}}" th:object="${evento}" method="post">
+            <!-- Campo ID (solo en modo edición) -->
+            <div th:if="${evento.id != null}">
+                <label for="idDisplay">ID:</label>
+                <span id="idDisplay" th:text="${evento.id}"
+                      style="display: inline-block; padding: 0.5em; border: 1px solid #1c655b; border-radius: 4px; background-color: #8a7d7d; color: white; margin-bottom: 1em;"></span>
+            </div>
+
+            <!-- Campo Nombre -->
+            <label for="nombre">Nombre del Evento:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" required maxlength="100"
+                   placeholder="Introduce el nombre del evento">
+
+            <!-- Campo Fecha de Inicio -->
+            <label for="fechaInicio">Fecha de Inicio:</label>
+            <input type="date" id="fechaInicio" th:field="*{fechaInicio}" required>
+
+            <!-- Campo Fecha de Fin -->
+            <label for="fechaFin">Fecha de Fin:</label>
+            <input type="date" id="fechaFin" th:field="*{fechaFin}">
+
+            <!-- Campo Ubicación -->
+            <label for="ubicacion">Ubicación:</label>
+            <textarea id="ubicacion" th:field="*{ubicacion}" rows="3"
+                      placeholder="Introduce la ubicación del evento"></textarea>
+
+            <!-- Campo Tipo de Evento -->
+            <label for="tipo">Tipo de Evento:</label>
+            <select id="tipo" th:field="*{tipo}">
+                <option value="otro" th:selected="${evento.tipo == 'otro'}">Otro</option>
+                <option value="benéfico" th:selected="${evento.tipo == 'benéfico'}">Benéfico</option>
+                <option value="formativo" th:selected="${evento.tipo == 'formativo'}">Formativo</option>
+                <option value="social" th:selected="${evento.tipo == 'social'}">Social</option>
+                <option value="cultural" th:selected="${evento.tipo == 'cultural'}">Cultural</option>
+            </select>
+
+            <!-- Campo Estado -->
+            <label for="estado">Estado del Evento:</label>
+            <select id="estado" th:field="*{estado}">
+                <option value="pendiente" th:selected="${evento.estado == 'pendiente'}">Pendiente</option>
+                <option value="en_curso" th:selected="${evento.estado == 'en_curso'}">En curso</option>
+                <option value="finalizado" th:selected="${evento.estado == 'finalizado'}">Finalizado</option>
+            </select>
+
+            <!-- Campo Presupuesto -->
+            <label for="presupuesto">Presupuesto (€):</label>
+            <input type="number" id="presupuesto" th:field="*{presupuesto}" step="0.01" min="0"
+                   placeholder="Introduce el presupuesto del evento">
+
+            <!-- Botón dinámico de envío -->
+            <button type="submit" class="btn btn-submit"
+                    th:text="${evento.id != null ? 'Actualizar Evento' : 'Crear Evento'}"></button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Asociación Monterde</p>
+</footer>
+</body>
+</html>
