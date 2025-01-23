@@ -18,5 +18,6 @@ public interface MiembroRepository extends JpaRepository<Miembro, Long> {
     @Query("update Miembro m set m.dni = :dni, m.nombre = :nombre, m.apellidos = :apellidos where m.id = :id")
     void updateDniAndNombreAndApellidosById(@Param("dni") String dni, @Param("nombre") String nombre, @Param("apellidos") String apellidos, @Param("id") Long id);
 
+    List<Miembro> findByEstado_Activo();
 
 }

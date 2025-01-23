@@ -44,7 +44,8 @@ public class MiembroController {
     // Listar todos los miembros
     @GetMapping
     public String listarMiembros(Model model) {
-        model.addAttribute("miembros", miembroService.obtenerTodosLosMiembros());
+        model.addAttribute("miembros", miembroService.ObtenerListaMiembrosActivos());
+//        model.addAttribute("miembros", miembroService.obtenerTodosLosMiembros());
         return "miembros/miembros";
     }
 

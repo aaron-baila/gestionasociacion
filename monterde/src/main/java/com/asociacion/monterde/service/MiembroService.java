@@ -48,4 +48,6 @@ public interface MiembroService {
     void actualizarMiembro(Long id, Miembro miembro);
 
     boolean existeMiembro(Long id);
+
+    Optional<List>ObtenerListaMiembrosActivos();
 }

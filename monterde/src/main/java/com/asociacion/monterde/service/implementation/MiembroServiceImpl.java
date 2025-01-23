@@ -59,4 +59,9 @@ public class MiembroServiceImpl implements MiembroService {
     public boolean existeMiembro(Long id) {
         return miembroRepository.existsById(id);
     }
+
+    @Override
+    public Optional<List> ObtenerListaMiembrosActivos() {
+        return Optional.empty();
+    }
 }

@@ -37,8 +37,8 @@ public class Miembro {
     @Lob
     private String direccion;
 //TODO: mirar bien fecha nacimiento al editar que se quede igual que la que habia
-//    @Column(nullable = false)
-//    private LocalDate fechaNacimiento; // Fecha de nacimiento
+    @Column(nullable = false)
+    private LocalDate fechaNacimiento; // Fecha de nacimiento
 
     @Lob
     private String foto;
