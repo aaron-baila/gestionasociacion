@@ -49,5 +49,5 @@ public interface MiembroService {
 
     boolean existeMiembro(Long id);
 
-    Optional<List> obtenerListaMiembrosActivos();
+    List obtenerListaMiembrosActivos();
 }

@@ -1,10 +1,10 @@
 -- Insertar datos en la tabla MIEMBRO
-INSERT INTO MIEMBRO (dni, nombre, apellidos, apodo, email, telefono, direccion, fecha_nacimiento, foto, cargo, fecha_ingreso, estado, LOPD)
+INSERT INTO MIEMBRO (id,dni, nombre, apellidos, apodo, email, telefono, direccion, fecha_nacimiento, foto, cargo, fecha_ingreso, estado, LOPD)
 VALUES
-('12345678A', 'Juan', 'Pérez García', 'Juanito', 'juanito@ejemplo.com', '123456789', 'Calle Ficticia 123, Ciudad', '1985-06-15', 'foto1.jpg', 'Presidente', '2022-01-01', 'ACTIVO', TRUE),
-('23456789B', 'Ana', 'López Fernández', 'Anita', 'anita@ejemplo.com', '987654321', 'Calle Real 456, Ciudad', '1990-11-23', 'foto2.jpg', 'Secretaria', '2023-05-15', 'ACTIVO', FALSE),
-('99456789B', 'Elimia', 'elim Fernández', 'Elimin', 'anrta@ejemplo.com', '987654321', 'Calle Real 456, Ciudad', '1990-11-23', 'foto2.jpg', 'Secretaria', '2023-05-15', 'INACTIVO', FALSE),
-('34567890C', 'Carlos', 'Martínez Rodríguez', 'Carlitos', 'carlitos@ejemplo.com', '111223344', 'Avenida Libertad 789, Ciudad', '1992-03-10', 'foto3.jpg', 'Tesorero', '2024-07-20', 'ACTIVO', TRUE);
+(1,'12345678A', 'Juan', 'Pérez García', 'Juanito', 'juanito@ejemplo.com', '123456789', 'Calle Ficticia 123, Ciudad', '1985-06-15', 'foto1.jpg', 'Presidente', '2022-01-01', 'ACTIVO', TRUE),
+(2,'23456789B', 'Ana', 'López Fernández', 'Anita', 'anita@ejemplo.com', '987654321', 'Calle Real 456, Ciudad', '1990-11-23', 'foto2.jpg', 'Secretaria', '2023-05-15', 'ACTIVO', FALSE),
+(3,'99456789B', 'Elimia', 'elim Fernández', 'Elimin', 'anrta@ejemplo.com', '987654321', 'Calle Real 456, Ciudad', '1990-11-23', 'foto2.jpg', 'Secretaria', '2023-05-15', 'INACTIVO', FALSE),
+(4,'34567890C', 'Carlos', 'Martínez Rodríguez', 'Carlitos', 'carlitos@ejemplo.com', '111223344', 'Avenida Libertad 789, Ciudad', '1992-03-10', 'foto3.jpg', 'Tesorero', '2024-07-20', 'ACTIVO', TRUE);
 
 -- Insertar datos en la tabla EVENTO
 INSERT INTO EVENTO (nombre, fecha_inicio, fecha_fin, ubicacion, tipo, estado, presupuesto)

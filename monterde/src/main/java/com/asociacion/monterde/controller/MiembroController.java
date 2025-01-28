@@ -47,12 +47,17 @@ public class MiembroController {
     @Operation(summary = "Listar todos los miembros activos")
     @GetMapping
     public String listarMiembros(Model model) {
-        List<Miembro> miembrosActivos = miembroService.obtenerListaMiembrosActivos().orElse(List.of());
-        model.addAttribute("miembros", miembrosActivos);
-
+        List miembrosActivos = miembroService.obtenerListaMiembrosActivos();
         if (miembrosActivos.isEmpty()) {
-            model.addAttribute("mensaje", "No hay miembros activos.");
+            model.addAttribute("error", "No se encontraron los miembros activos.");
+        }else {
+            model.addAttribute("miembros", miembrosActivos);
         }
+//        if (miembrosActivos.isPresent()) {
+//            model.addAttribute("miembros", miembrosActivos);
+//        } else {
+//            model.addAttribute("mensaje", "No hay miembros activos.");
+//        }
 
         return "miembros/miembros";
     }
@@ -84,7 +89,7 @@ public class MiembroController {
 
     @Operation(summary = "Editar un miembro existente")
     @PostMapping("/formulario/{id}")
-    public String editarMiembro(@PathVariable Long id, @ModelAttribute @Valid Miembro miembroActualizado, BindingResult bindingResult, Model model) {
+    private String editarMiembro(@PathVariable Long id, @ModelAttribute @Valid Miembro miembroActualizado, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("error", "Por favor corrige los errores en el formulario.");
             return "miembros/formulario-miembro";
