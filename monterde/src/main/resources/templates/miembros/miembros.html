@@ -26,7 +26,7 @@
                 <!--                <th>Fecha de Nacimiento</th>-->
                 <th>Cargo</th>
                 <!--                <th>Fecha de Ingreso</th>-->
-                <th>Estado</th>
+<!--                <th>Estado</th>-->
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -43,7 +43,7 @@
 <!--                                <td th:text="${miembro.fechaNacimiento}"></td>-->
                 <td th:text="${miembro.cargo}"></td>
 <!--                                <td th:text="${miembro.fechaIngreso}"></td>-->
-                <td th:text="${miembro.estado}"></td>
+<!--                <td th:text="${miembro.estado}"></td>-->
                 <td>
                     <a th:href="@{/miembros/formulario/{id}(id=${miembro.id})}" class="btn btn-edit">Editar</a>
                     <a th:href="@{/miembros/eliminar/{id}(id=${miembro.id})}" class="btn btn-delete"

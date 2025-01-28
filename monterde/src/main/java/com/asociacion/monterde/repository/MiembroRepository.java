@@ -20,4 +20,6 @@ public interface MiembroRepository extends JpaRepository<Miembro, Long> {
 
     List<Miembro> findByEstado(Miembro.Estado estado);
 
+
+
 }

@@ -50,9 +50,10 @@ public class MiembroController {
         List miembrosActivos = miembroService.obtenerListaMiembrosActivos();
         if (miembrosActivos.isEmpty()) {
             model.addAttribute("error", "No se encontraron los miembros activos.");
-        }else {
+        } else {
             model.addAttribute("miembros", miembrosActivos);
         }
+        //TODO: mirar de si poner optional
 //        if (miembrosActivos.isPresent()) {
 //            model.addAttribute("miembros", miembrosActivos);
 //        } else {
@@ -61,12 +62,26 @@ public class MiembroController {
 
         return "miembros/miembros";
     }
+//TODO: poner bien los mapping no ponner get poner delete o post
+//    este metodo elimina de verdad pero de momento solo pondremos en inactivo
+//    @Operation(summary = "Eliminar un miembro por ID")
+//    @GetMapping("/eliminar/{id}")
+//    public String eliminarMiembro(@PathVariable Long id, @RequestParam(required = false) String redirect) {
+//        if (miembroService.existeMiembro(id)) {
+//            miembroService.eliminarMiembro(id);
+//
+//            if ("true".equals(redirect)) {
+//                return "redirect:/miembros";
+//            }
+//        }
+//        return "redirect:/miembros?error=notfound";
+//    }
 
     @Operation(summary = "Eliminar un miembro por ID")
-    @PostMapping("/eliminar/{id}")
+    @GetMapping("/eliminar/{id}")
     public String eliminarMiembro(@PathVariable Long id, @RequestParam(required = false) String redirect) {
         if (miembroService.existeMiembro(id)) {
-            miembroService.eliminarMiembro(id);
+            miembroService.inactivarMiembro(id);
 
             if ("true".equals(redirect)) {
                 return "redirect:/miembros";

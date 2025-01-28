@@ -50,4 +50,5 @@ public interface MiembroService {
     boolean existeMiembro(Long id);
 
     List obtenerListaMiembrosActivos();
+    void inactivarMiembro(Long id);
 }

@@ -65,5 +65,13 @@ public class MiembroServiceImpl implements MiembroService {
         return miembroRepository.findByEstado(Miembro.Estado.ACTIVO);
     }
 
+    @Override
+    public void inactivarMiembro(Long id) {
+        miembroRepository.findById(id).ifPresent(miembro -> {
+            miembro.setEstado(Miembro.Estado.INACTIVO);
+            miembroRepository.save(miembro);
+        });
+    }
+
 
 }
