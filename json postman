@@ -1,0 +1,338 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de la Asociación Cultural Monterde",
+    "description": "API para gestionar miembros, eventos y recursos de la Asociación Cultural Monterde",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/miembros": {
+      "get": {
+        "summary": "Obtener lista de miembros",
+        "responses": {
+          "200": {
+            "description": "Lista de miembros",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Miembro"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un nuevo miembro",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Miembro"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Miembro creado"
+          }
+        }
+      }
+    },
+    "/miembros/{id}": {
+      "get": {
+        "summary": "Obtener un miembro por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID del miembro",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Miembro encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Miembro"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualizar un miembro por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID del miembro",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Miembro"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Miembro actualizado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un miembro por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID del miembro",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Miembro eliminado"
+          }
+        }
+      }
+    },
+    "/eventos": {
+      "get": {
+        "summary": "Obtener lista de eventos",
+        "responses": {
+          "200": {
+            "description": "Lista de eventos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Evento"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un nuevo evento",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Evento"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Evento creado"
+          }
+        }
+      }
+    },
+    "/eventos/{id}": {
+      "get": {
+        "summary": "Obtener un evento por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID del evento",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Evento encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evento"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualizar un evento por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID del evento",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Evento"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Evento actualizado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un evento por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID del evento",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Evento eliminado"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Miembro": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "dni": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellidos": {
+            "type": "string"
+          },
+          "apodo": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "telefono": {
+            "type": "string"
+          },
+          "direccion": {
+            "type": "string"
+          },
+          "fecha_nacimiento": {
+            "type": "string",
+            "format": "date"
+          },
+          "foto": {
+            "type": "string"
+          },
+          "cargo": {
+            "type": "string"
+          },
+          "fecha_ingreso": {
+            "type": "string",
+            "format": "date"
+          },
+          "estado": {
+            "type": "string",
+            "enum": [
+              "activo",
+              "inactivo"
+            ]
+          },
+          "LOPD": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Evento": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "fecha_inicio": {
+            "type": "string",
+            "format": "date"
+          },
+          "fecha_fin": {
+            "type": "string",
+            "format": "date"
+          },
+          "ubicacion": {
+            "type": "string"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "cultural",
+              "benéfico",
+              "formativo",
+              "otro"
+            ]
+          },
+          "estado": {
+            "type": "string",
+            "enum": [
+              "pendiente",
+              "en curso",
+              "finalizado"
+            ]
+          },
+          "presupuesto": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    }
+  }
+}

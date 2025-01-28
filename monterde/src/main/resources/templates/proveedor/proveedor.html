@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Proveedores</title>
+</head>
+<body>
+<h1>Lista de Proveedores</h1>
+
+<!-- Mensajes flash (si los hay) -->
+<div th:if="${mensaje != null and #strings.isNotEmpty(mensaje)}" style="color: green;">
+    <p th:text="${mensaje}"></p>
+</div>
+<div th:if="${error != null and #strings.isNotEmpty(error)}" style="color: red;">
+    <p th:text="${error}"></p>
+</div>
+
+<!-- Botón para crear un nuevo proveedor -->
+<a href="/proveedor/nuevo" style="text-decoration: none; color: white; background-color: green; padding: 5px 10px; border-radius: 5px;">Nuevo Proveedor</a>
+
+<table border="1" style="width: 100%; margin-top: 10px; text-align: left; border-collapse: collapse;">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        <th>CIF</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterar sobre la lista de proveedores -->
+    <tr th:each="proveedor : ${proveedores}">
+        <td th:text="${proveedor.id}"></td>
+        <td th:text="${proveedor.nombre}"></td>
+        <td th:text="${proveedor.direccion}"></td>
+        <td th:text="${proveedor.telefono}"></td>
+        <td th:text="${proveedor.email}"></td>
+        <td th:text="${proveedor.cif}"></td>
+        <td th:text="${proveedor.tipo}"></td>
+        <td>
+            <a th:href="@{/proveedor/editar/{id}(id=${proveedor.id})}" style="text-decoration: none; color: blue;" title="Editar proveedor">Editar</a> |
+            <a th:href="@{/proveedor/eliminar/{id}(id=${proveedor.id})}" style="text-decoration: none; color: red;" onclick="return confirm('¿Estás seguro de eliminar este proveedor?')" title="Eliminar proveedor">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

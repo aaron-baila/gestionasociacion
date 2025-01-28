@@ -58,7 +58,7 @@ public class MiembroController {
     }
 
     @Operation(summary = "Eliminar un miembro por ID")
-    @GetMapping("/eliminar/{id}")
+    @PostMapping("/eliminar/{id}")
     public String eliminarMiembro(@PathVariable Long id, @RequestParam(required = false) String redirect) {
         if (miembroService.existeMiembro(id)) {
             miembroService.eliminarMiembro(id);

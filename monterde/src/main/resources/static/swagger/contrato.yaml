@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: API de la Asociación Cultural Monterde
   description: API para gestionar miembros, eventos y recursos de la Asociación Cultural Monterde
@@ -163,6 +163,7 @@ components:
           type: integer
         dni:
           type: string
+          pattern: "^[0-9]{8}[A-Za-z]{1}$" # Expresión regular para DNI
         nombre:
           type: string
         apellidos:
@@ -171,8 +172,10 @@ components:
           type: string
         email:
           type: string
+          format: email
         telefono:
           type: string
+          pattern: "^[0-9]{9}$"  # Expresión regular para teléfono
         direccion:
           type: string
         fecha_nacimiento:
@@ -215,4 +218,3 @@ components:
         presupuesto:
           type: number
           format: float
-

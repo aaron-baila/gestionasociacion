@@ -36,7 +36,7 @@ public class Miembro {
     private String telefono;
     @Lob
     private String direccion;
-//TODO: mirar bien fecha nacimiento al editar que se quede igual que la que habia
+    //TODO: mirar bien fecha nacimiento al editar que se quede igual que la que habia
     @Column(nullable = false)
     private LocalDate fechaNacimiento; // Fecha de nacimiento
 
@@ -59,4 +59,18 @@ public class Miembro {
         ACTIVO, INACTIVO
     }
 
+    public Miembro(String dni, String nombre, String apellidos, String apodo, String email, String telefono, String direccion, LocalDate fechaNacimiento, String foto, String cargo, Estado estado, Boolean LOPD) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.apodo = apodo;
+        this.email = email;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.fechaNacimiento = fechaNacimiento;
+        this.foto = foto;
+        this.cargo = cargo;
+        this.estado = estado;
+        this.LOPD = LOPD;
+    }
 }
