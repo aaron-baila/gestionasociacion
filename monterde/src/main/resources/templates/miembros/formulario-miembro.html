@@ -9,7 +9,8 @@
 <div th:replace="fragments/header :: header"></div>
 <main>
     <!-- Título dinámico que cambia si es creación o edición -->
-    <h2 th:text="${miembro.id != null ? 'Editar Miembro' : 'Nuevo Miembro'}"></h2>
+    <h2 th:text="${miembro != null && miembro.id != null ? 'Editar Miembro' : 'Nuevo Miembro'}"></h2>
+
     <section>
         <!-- Formulario de creación o edición -->
         <form th:action="@{${formAction}}" th:object="${miembro}" method="post" enctype="multipart/form-data">

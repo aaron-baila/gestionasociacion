@@ -48,6 +48,12 @@
                     <a th:href="@{/miembros/formulario/{id}(id=${miembro.id})}" class="btn btn-edit">Editar</a>
                     <a th:href="@{/miembros/eliminar/{id}(id=${miembro.id})}" class="btn btn-delete"
                        onclick="return confirm('¿Estás seguro de que quieres eliminar este miembro?');">Eliminar</a>
+
+                    <form action="@{/miembros/eliminar/{id}(id=${miembro.id})}" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit">Eliminar</button>
+                    </form>
+
                 </td>
             </tr>
             </tbody>

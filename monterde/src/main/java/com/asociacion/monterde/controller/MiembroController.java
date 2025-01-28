@@ -22,6 +22,29 @@ public class MiembroController {
         this.miembroService = miembroService;
     }
 
+<<<<<<< Updated upstream
+=======
+    @Operation(summary = "Listar todos los miembros activos")
+    @GetMapping
+    public String listarMiembros(Model model) {
+        List<Miembro> miembrosActivos = miembroService.obtenerListaMiembrosActivos().orElse(List.of());
+        model.addAttribute("miembros", miembrosActivos);
+
+        if (miembrosActivos.isEmpty()) {
+            model.addAttribute("mensaje", "No hay miembros activos.");
+        }
+
+        return "miembros/miembros";
+    }
+
+    @Operation(summary = "Mostrar formulario vacio")
+    @GetMapping("/formulario")
+    public String formulario() {
+        return "miembros/formulario-miembro";
+    }
+
+    @Operation(summary = "Crear un nuevo miembro")
+>>>>>>> Stashed changes
     @PostMapping("/formulario")
     public String crearMiembro(@ModelAttribute @Valid Miembro miembro, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -39,6 +62,7 @@ public class MiembroController {
         }
     }
 
+<<<<<<< Updated upstream
 
 
     // Listar todos los miembros
@@ -47,6 +71,8 @@ public class MiembroController {
         model.addAttribute("miembros", miembroService.obtenerTodosLosMiembros());
         return "miembros/miembros";
     }
+=======
+>>>>>>> Stashed changes
 
     // Mostrar formulario vacío para agregar un nuevo miembro
     @GetMapping("/formulario")
@@ -61,15 +87,23 @@ public class MiembroController {
             miembroService.eliminarMiembro(id); // Llama al servicio para eliminar al miembro
 
             if ("true".equals(redirect)) {
+<<<<<<< Updated upstream
                 // Si el parámetro 'redirect' está presente, redirige a la lista de miembros
                 return "redirect:/miembros";
+=======
+                return "redirect:/miembros/miembros";
+>>>>>>> Stashed changes
             }
         }
         return "redirect:/miembros?error=notfound"; // Redirige si no se encuentra el miembro
     }
 
 
+<<<<<<< Updated upstream
     // Mostrar formulario prellenado para editar un miembro existente
+=======
+    @Operation(summary = "Mostrar el formulario para editar un miembro")
+>>>>>>> Stashed changes
     @GetMapping("/formulario/{id}")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         Optional<Miembro> miembro = miembroService.obtenerMiembroPorId(id);
