@@ -61,7 +61,9 @@ public class MiembroServiceImpl implements MiembroService {
     }
 
     @Override
-    public Optional<List> ObtenerListaMiembrosActivos() {
-        return Optional.empty();
+    public Optional<List> obtenerListaMiembrosActivos() {
+        return Optional.ofNullable(miembroRepository.findByEstado(Miembro.Estado.ACTIVO));
     }
+
+
 }

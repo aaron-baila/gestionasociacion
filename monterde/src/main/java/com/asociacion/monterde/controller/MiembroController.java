@@ -8,20 +8,25 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
+@Tag(name = "Miembros", description = "Gestión de los miembros de la asociación")
 @Controller
 @RequestMapping("/miembros")
 public class MiembroController {
 
     private final MiembroService miembroService;
 
-    // Inyección de dependencias mediante constructor
     public MiembroController(MiembroService miembroService) {
         this.miembroService = miembroService;
     }
 
+    @Operation(summary = "Crear un nuevo miembro")
     @PostMapping("/formulario")
     public String crearMiembro(@ModelAttribute @Valid Miembro miembro, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -31,7 +36,7 @@ public class MiembroController {
         try {
             miembro.setFechaIngreso(LocalDate.now());
             miembroService.crearMiembro(miembro);
-            model.addAttribute("success", "Miembro creado con éxito."); // Mensaje de éxito
+            model.addAttribute("success", "Miembro creado con éxito.");
             return "redirect:/miembros";
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar el miembro. Inténtalo de nuevo.");
@@ -39,58 +44,58 @@ public class MiembroController {
         }
     }
 
-
-
-    // Listar todos los miembros
+    @Operation(summary = "Listar todos los miembros activos")
     @GetMapping
     public String listarMiembros(Model model) {
-        model.addAttribute("miembros", miembroService.ObtenerListaMiembrosActivos());
-//        model.addAttribute("miembros", miembroService.obtenerTodosLosMiembros());
+        List<Miembro> miembrosActivos = miembroService.obtenerListaMiembrosActivos().orElse(List.of());
+        model.addAttribute("miembros", miembrosActivos);
+
+        if (miembrosActivos.isEmpty()) {
+            model.addAttribute("mensaje", "No hay miembros activos.");
+        }
+
         return "miembros/miembros";
     }
 
-    // Mostrar formulario vacío para agregar un nuevo miembro
-    @GetMapping("/formulario")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("miembro", new Miembro());
-        return "miembros/formulario-miembro"; // Nombre del template Thymeleaf
-    }
-
+    @Operation(summary = "Eliminar un miembro por ID")
     @GetMapping("/eliminar/{id}")
     public String eliminarMiembro(@PathVariable Long id, @RequestParam(required = false) String redirect) {
         if (miembroService.existeMiembro(id)) {
-            miembroService.eliminarMiembro(id); // Llama al servicio para eliminar al miembro
+            miembroService.eliminarMiembro(id);
 
             if ("true".equals(redirect)) {
-                // Si el parámetro 'redirect' está presente, redirige a la lista de miembros
                 return "redirect:/miembros";
             }
         }
-        return "redirect:/miembros?error=notfound"; // Redirige si no se encuentra el miembro
+        return "redirect:/miembros?error=notfound";
     }
 
-
-    // Mostrar formulario prellenado para editar un miembro existente
+    @Operation(summary = "Mostrar el formulario para editar un miembro")
     @GetMapping("/formulario/{id}")
     public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         Optional<Miembro> miembro = miembroService.obtenerMiembroPorId(id);
         if (miembro.isPresent()) {
             model.addAttribute("miembro", miembro.get());
-            return "miembros/formulario-miembro"; // Vista para editar miembro
+            return "miembros/formulario-miembro";
         } else {
-            return "redirect:/miembros?error=notfound"; // Redirige si no se encuentra el miembro
+            return "redirect:/miembros?error=notfound";
         }
     }
 
-    // Editar un miembro existente
+    @Operation(summary = "Editar un miembro existente")
     @PostMapping("/formulario/{id}")
-    public String editarMiembro(@PathVariable Long id, @ModelAttribute Miembro miembroActualizado, Model model) {
+    public String editarMiembro(@PathVariable Long id, @ModelAttribute @Valid Miembro miembroActualizado, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("error", "Por favor corrige los errores en el formulario.");
+            return "miembros/formulario-miembro";
+        }
+
         if (miembroService.existeMiembro(id)) {
             miembroService.actualizarMiembro(id, miembroActualizado);
-            return "redirect:/miembros"; // Redirección tras la actualización
+            return "redirect:/miembros";
         } else {
             model.addAttribute("error", "El miembro no existe.");
-            return "formulario-miembro"; // Redirige al formulario con el mensaje de error
+            return "miembros/formulario-miembro";
         }
     }
 }
