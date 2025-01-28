@@ -1,5 +1,6 @@
 package com.asociacion.monterde.controller;
 
+import com.asociacion.monterde.model.Evento;
 import com.asociacion.monterde.model.Miembro;
 import com.asociacion.monterde.service.MiembroService;
 import jakarta.validation.Valid;
@@ -26,6 +27,14 @@ public class MiembroController {
         this.miembroService = miembroService;
     }
 
+    // Mostrar formulario vacío para agregar un nuevo evento
+    @GetMapping("/formulario")
+    public String mostrarFormulario(Model model) {
+        model.addAttribute("miembro", new Miembro());
+        return "miembros/formulario-miembro"; // Nombre del template Thymeleaf
+    }
+
+    //TODO: por lo que sea el postmaping da problemas
     @Operation(summary = "Crear un nuevo miembro")
     @PostMapping("/formulario")
     public String crearMiembro(@ModelAttribute @Valid Miembro miembro, BindingResult bindingResult, Model model) {
