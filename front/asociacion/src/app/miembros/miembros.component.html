@@ -1,0 +1,16 @@
+<h2>Lista de Miembros</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Rol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let miembro of miembros">
+      <td>{{ miembro.nombre }}</td>
+      <td>{{ miembro.rol }}</td>
+    </tr>
+  </tbody>
+</table>
+
