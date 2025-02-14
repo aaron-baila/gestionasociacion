@@ -1,16 +1,29 @@
-<h2>Lista de Miembros</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Rol</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let miembro of miembros">
-      <td>{{ miembro.nombre }}</td>
-      <td>{{ miembro.rol }}</td>
-    </tr>
-  </tbody>
-</table>
+<h1>Miembros</h1>
 
+<!-- Muestra un mensaje mientras se cargan los datos -->
+<p *ngIf="!(miembros$ | async); else table">Cargando...</p>
+
+<!-- Tabla que se muestra si miembros$ tiene datos -->
+<ng-template #table>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let miembro of miembros$ | async">
+        <td>{{ miembro.nombre }}</td>
+        <td>{{ miembro.edad }}</td>
+        <td>{{ miembro.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-template>
+
+<!-- Mensaje en caso de que no haya miembros -->
+<ng-template #noData>
+  <p>No hay miembros disponibles.</p>
+</ng-template>
