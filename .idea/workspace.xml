@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="777565fb-d593-4208-83a5-f6a7b693f10f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monterde/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/monterde/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monterde/src/main/java/com/asociacion/monterde/controller/MiembroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/monterde/src/main/java/com/asociacion/monterde/controller/MiembroController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monterde/src/main/java/com/asociacion/monterde/repository/MiembroRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/monterde/src/main/java/com/asociacion/monterde/repository/MiembroRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/monterde/src/main/java/com/asociacion/monterde/service/implementation/MiembroServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/monterde/src/main/java/com/asociacion/monterde/service/implementation/MiembroServiceImpl.java" afterDir="false" />
-    </list>
+    <list default="true" id="777565fb-d593-4208-83a5-f6a7b693f10f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,10 +13,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2rZaz5e4lH0RM0klwrMDCdnhtLs" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -31,10 +27,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/OpenNow/Proyectos/pruebas/gestionasociacion/monterde",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
