@@ -8,16 +8,44 @@
   <table>
     <thead>
       <tr>
-        <th>Nombre</th>
-        <th>Edad</th>
-        <th>Email</th>
+        <th>id</th>
+        <th>dni</th>
+        <th>nombre</th>
+        <th>apellidos</th>
+        <th>apodo</th>
+        <th>email</th>
+        <th>telefono</th>
+        <th>direccion</th>
+        <th>fecha Nacimiento</th>
+        <th>foto</th>
+        <th>cargo</th>
+        <th>fecha Ingreso</th>
+        <th>estado</th>
+        <th>lopd</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let miembro of miembros$ | async">
+        <td>{{ miembro.id }}</td>
+        <td>{{ miembro.dni }}</td>
+        <td>{{ miembro.apellidos }}</td>
+        <td>{{ miembro.apodo }}</td>
         <td>{{ miembro.nombre }}</td>
-        <td>{{ miembro.edad }}</td>
         <td>{{ miembro.email }}</td>
+        <td>{{ miembro.telefono }}</td>
+        <td>{{ miembro.direccion }}</td>
+        <td>{{ miembro.fechaNacimiento }}</td>
+        <td>{{ miembro.foto }}</td>
+        <td>{{ miembro.cargo }}</td>
+        <td>{{ miembro.fechaIngreso }}</td>
+        <td>{{ miembro.estado }}</td>
+        <td>
+          <input
+            type="checkbox"
+            [(ngModel)]="miembro.lopd"
+            [disabled]="miembro.algunEstado"
+          />
+        </td>
       </tr>
     </tbody>
   </table>

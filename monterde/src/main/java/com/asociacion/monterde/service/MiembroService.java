@@ -1,7 +1,6 @@
 package com.asociacion.monterde.service;
 
 import com.asociacion.monterde.model.Miembro;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +20,9 @@ public interface MiembroService {
      * Crea un nuevo miembro.
      *
      * @param miembro Objeto Miembro a crear.
+     * @return El Miembro recién creado.
      */
-    void crearMiembro(Miembro miembro);
+    Miembro crearMiembro(Miembro miembro);
 
     /**
      * Elimina un miembro por su ID.
@@ -40,15 +40,33 @@ public interface MiembroService {
     Optional<Miembro> obtenerMiembroPorId(Long id);
 
     /**
-     * Actualiza la información de un miembro existente.
+     * Actualiza un miembro existente.
      *
-     * @param id
-     * @param miembro Objeto Miembro con la información actualizada.
+     * @param id      ID del miembro a actualizar.
+     * @param miembro Objeto Miembro con los datos actualizados.
+     * @return Miembro actualizado.
      */
-    void actualizarMiembro(Long id, Miembro miembro);
+    Miembro actualizarMiembro(Long id, Miembro miembro);
 
+    /**
+     * Verifica si un miembro existe por su ID.
+     *
+     * @param id ID del miembro.
+     * @return true si el miembro existe, false en caso contrario.
+     */
     boolean existeMiembro(Long id);
 
-    List obtenerListaMiembrosActivos();
+    /**
+     * Obtiene una lista de todos los miembros activos.
+     *
+     * @return Lista de miembros activos.
+     */
+    List<Miembro> obtenerListaMiembrosActivos();
+
+    /**
+     * Inactiva un miembro en lugar de eliminarlo permanentemente.
+     *
+     * @param id ID del miembro a inactivar.
+     */
     void inactivarMiembro(Long id);
 }

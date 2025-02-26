@@ -1,12 +1,9 @@
 package com.asociacion.monterde.controller;
 
-import com.asociacion.monterde.model.Evento;
 import com.asociacion.monterde.model.Miembro;
 import com.asociacion.monterde.service.MiembroService;
 import jakarta.validation.Valid;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Tag(name = "Miembros", description = "Gestión de los miembros de la asociación")
-@Controller
+@CrossOrigin(origins = "http://localhost:4200") // Permitir peticiones desde Angular
+@RestController
 @RequestMapping("/miembros")
 public class MiembroController {
 
@@ -27,104 +25,45 @@ public class MiembroController {
         this.miembroService = miembroService;
     }
 
-    // Mostrar formulario vacío para agregar un nuevo evento
-    @GetMapping("/formulario")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("miembro", new Miembro());
-        return "miembros/formulario-miembro"; // Nombre del template Thymeleaf
-    }
-
-    //TODO: por lo que sea el postmaping da problemas
-    @Operation(summary = "Crear un nuevo miembro")
-    @PostMapping("/formulario")
-    public String crearMiembro(@ModelAttribute @Valid Miembro miembro, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("error", "Por favor corrige los errores en el formulario.");
-            return "miembros/formulario-miembro";
-        }
-        try {
-            miembro.setFechaIngreso(LocalDate.now());
-            miembroService.crearMiembro(miembro);
-            model.addAttribute("success", "Miembro creado con éxito.");
-            return "redirect:/miembros";
-        } catch (Exception e) {
-            model.addAttribute("error", "Error al guardar el miembro. Inténtalo de nuevo.");
-            return "miembros/formulario-miembro";
-        }
-    }
-
     @Operation(summary = "Listar todos los miembros activos")
     @GetMapping
-    public String listarMiembros(Model model) {
-        List miembrosActivos = miembroService.obtenerListaMiembrosActivos();
-        if (miembrosActivos.isEmpty()) {
-            model.addAttribute("error", "No se encontraron los miembros activos.");
-        } else {
-            model.addAttribute("miembros", miembrosActivos);
-        }
-        //TODO: mirar de si poner optional
-//        if (miembrosActivos.isPresent()) {
-//            model.addAttribute("miembros", miembrosActivos);
-//        } else {
-//            model.addAttribute("mensaje", "No hay miembros activos.");
-//        }
-
-        return "miembros/miembros";
+    public ResponseEntity<List<Miembro>> listarMiembros() {
+        List<Miembro> miembrosActivos = miembroService.obtenerListaMiembrosActivos();
+        return ResponseEntity.ok(miembrosActivos);
     }
-//TODO: poner bien los mapping no ponner get poner delete o post
-//    este metodo elimina de verdad pero de momento solo pondremos en inactivo
-//    @Operation(summary = "Eliminar un miembro por ID")
-//    @GetMapping("/eliminar/{id}")
-//    public String eliminarMiembro(@PathVariable Long id, @RequestParam(required = false) String redirect) {
-//        if (miembroService.existeMiembro(id)) {
-//            miembroService.eliminarMiembro(id);
-//
-//            if ("true".equals(redirect)) {
-//                return "redirect:/miembros";
-//            }
-//        }
-//        return "redirect:/miembros?error=notfound";
-//    }
 
-    @Operation(summary = "Eliminar un miembro por ID")
-    @GetMapping("/eliminar/{id}")
-    public String eliminarMiembro(@PathVariable Long id, @RequestParam(required = false) String redirect) {
+    @Operation(summary = "Crear un nuevo miembro")
+    @PostMapping
+    public void crearMiembro(@RequestBody @Valid Miembro miembro) {
+        miembro.setFechaIngreso(LocalDate.now());
+       miembroService.crearMiembro(miembro);
+
+    }
+
+    @Operation(summary = "Eliminar (desactivar) un miembro por ID")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarMiembro(@PathVariable Long id) {
         if (miembroService.existeMiembro(id)) {
             miembroService.inactivarMiembro(id);
-
-            if ("true".equals(redirect)) {
-                return "redirect:/miembros";
-            }
+            return ResponseEntity.ok("Miembro inactivado con éxito.");
         }
-        return "redirect:/miembros?error=notfound";
+        return ResponseEntity.notFound().build();
     }
 
-    @Operation(summary = "Mostrar el formulario para editar un miembro")
-    @GetMapping("/formulario/{id}")
-    public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
+    @Operation(summary = "Obtener un miembro por ID")
+    @GetMapping("/{id}")
+    public ResponseEntity<Miembro> obtenerMiembroPorId(@PathVariable Long id) {
         Optional<Miembro> miembro = miembroService.obtenerMiembroPorId(id);
-        if (miembro.isPresent()) {
-            model.addAttribute("miembro", miembro.get());
-            return "miembros/formulario-miembro";
-        } else {
-            return "redirect:/miembros?error=notfound";
-        }
+        return miembro.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Editar un miembro existente")
-    @PostMapping("/formulario/{id}")
-    private String editarMiembro(@PathVariable Long id, @ModelAttribute @Valid Miembro miembroActualizado, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("error", "Por favor corrige los errores en el formulario.");
-            return "miembros/formulario-miembro";
+    @Operation(summary = "Actualizar un miembro")
+    @PutMapping("/{id}")
+    public ResponseEntity<Miembro> editarMiembro(@PathVariable Long id, @RequestBody @Valid Miembro miembroActualizado) {
+        if (!miembroService.existeMiembro(id)) {
+            return ResponseEntity.notFound().build();
         }
-
-        if (miembroService.existeMiembro(id)) {
-            miembroService.actualizarMiembro(id, miembroActualizado);
-            return "redirect:/miembros";
-        } else {
-            model.addAttribute("error", "El miembro no existe.");
-            return "miembros/formulario-miembro";
-        }
+        Miembro miembroEditado = miembroService.actualizarMiembro(id, miembroActualizado);
+        return ResponseEntity.ok(miembroEditado);
     }
 }

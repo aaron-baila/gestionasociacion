@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MiembrosService } from '../miembros.service';
 import { Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-miembros',
-  // imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './miembros.component.html',
   styleUrls: ['./miembros.component.css']
 })
@@ -16,7 +17,7 @@ export class MiembrosComponent {
   constructor(private miembrosService: MiembrosService) { }
 
   ngOnInit(): void {
-    this.miembros$ = this.miembrosService.getMiembros(); // Asignamos el observable
+    this.miembros$ = this.miembrosService.getMiembros();
   }
   
 }
